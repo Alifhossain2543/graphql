@@ -1,0 +1,5 @@
+login
+add note
+set cookie and headers
+verify header and cookie to add note
+logout
