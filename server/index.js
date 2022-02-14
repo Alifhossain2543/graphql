@@ -17,9 +17,9 @@ const options = {
   useUnifiedTopology: true,
 }
 
-app.get('/', async (_, res) => {
-    res.send("hit the endpoint")
-})
+// app.get('/', async (_, res) => {
+//     res.send("hit the endpoint")
+// })
 
 mongoose.connect(process.env.DB_PASSWORD, options, () => {
   console.log("db is connected")
@@ -29,7 +29,9 @@ async function startApolloServer() {
   const server = new ApolloServer({
     typeDefs,
     resolvers,
-    context : ({req, res}) => {return {req, res}}
+    context : ({req, res}) => {return {req, res}},
+    formatError : (err) => console.log(err)
+  
 
   })
 

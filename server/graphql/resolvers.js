@@ -36,10 +36,7 @@ const resolvers = {
       const token = jwt.sign({ email: args.email }, process.env.PRIVATE_KEY, {
         expiresIn: "1h",
       })
-
-      res.cookie("token", token, {
-        httpOnly: true,
-      })
+      res.cookie("token", token)
       res.setHeader("Authorization", "Bearer " + token)
 
       return { email: args.email, token: token }

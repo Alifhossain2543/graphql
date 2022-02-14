@@ -1,5 +1,6 @@
 login
 add note
+upload files
 set cookie and headers
 verify header and cookie to add note
 logout
