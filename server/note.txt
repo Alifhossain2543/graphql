@@ -1,6 +1,7 @@
 login
 add note
 upload files
+add Dates
 set cookie and headers
 verify header and cookie to add note
 logout

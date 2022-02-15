@@ -8,7 +8,7 @@ const { ApolloServer } = require("apollo-server-express")
 const typeDefs = require('./graphql/typeDefs')
 const resolvers = require("./graphql/resolvers")
 
-app.use(express.json())
+app.use(express.json({limit: "10MB"}))
 app.use(cookieParser())
 app.use(cors())
 
@@ -29,7 +29,7 @@ async function startApolloServer() {
   const server = new ApolloServer({
     typeDefs,
     resolvers,
-    context : ({req, res}) => {return {req, res}},
+    context : ({req, res}) => {return {req, res}}, //here we can check and return if the user is authenticated and let them access other endpoints.// 
     formatError : (err) => console.log(err)
   
 

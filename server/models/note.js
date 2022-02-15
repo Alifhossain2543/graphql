@@ -4,7 +4,8 @@ const Schema = mongoose.Schema
 const noteSchema = new Schema(
   {
     note: String,
-    comment : String
+    comment: String,
+    createdOn: Date
   },
   { timestamps: true }
 )

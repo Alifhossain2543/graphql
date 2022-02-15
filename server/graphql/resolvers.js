@@ -4,6 +4,7 @@ const { AuthenticationError } = require("apollo-server-express")
 const Note = require("../models/note")
 const protectedRoute = require("../graphql/protectedRoute")
 
+
 const resolvers = {
   Query: {
     getNotes: async (parent, args, { req, res }, info) => {
@@ -34,7 +35,7 @@ const resolvers = {
         throw new AuthenticationError("Credentials does not exist")
 
       const token = jwt.sign({ email: args.email }, process.env.PRIVATE_KEY, {
-        expiresIn: "1h",
+        expiresIn: "4h",
       })
       res.cookie("token", token)
       res.setHeader("Authorization", "Bearer " + token)
@@ -44,11 +45,18 @@ const resolvers = {
 
     addNote: async (_, args, context, info) => {
       protectedRoute(_, args, context, info)
-      const note = await new Note({ note: args.note, comment: args.comment })
+      const note = await new Note({
+        note: args.note,
+        comment: args.comment,
+        createdOn: args.createdOn,
+      })
       await note.save()
 
       return note
     },
+    fileUpload: async(_, args, { req, res }) => {
+      console.log(args)
+    }
   },
 }
 
